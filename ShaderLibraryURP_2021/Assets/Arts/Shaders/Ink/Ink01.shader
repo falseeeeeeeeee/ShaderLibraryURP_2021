@@ -220,15 +220,22 @@ Shader "URP/Toon/Ink01"
                 half3 shadowColor = lerp(_ShadowColor.rgb, half3(1.0, 1.0, 1.0), rampColor);
 			    
                 // Color
-                float4 var_BaseMap = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv);                         
-                half3 color = var_BaseMap.rgb * _BaseColor.rgb * shadowColor * mainlighShadow
-			                + var_BaseMap.rgb * _BaseColor.rgb * Ambient
+                float4 var_BaseMap = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv);
+				
+				// Gray
+				float texGrey = (var_BaseMap.r + var_BaseMap.g + var_BaseMap.b)*0.33;
+				texGrey = pow(texGrey, 0.4);
+				texGrey *= 1 - cos(texGrey * 3.14);
+
+				// Blend Color
+                half3 color = texGrey.rrr * _BaseColor.rgb * shadowColor * mainlighShadow
+			                + texGrey.rrr * _BaseColor.rgb * Ambient
 			                ;
 			    color = lerp(_OutlineColor.rgb, color, fresnel);
 			    
                 half alpha = 1;
 
-			    //Fog
+			    // Fog
                 real fogFactor = ComputeFogFactor(input.positionCS.z * input.positionCS.w);
                 color = MixFog(color, fogFactor);
                 

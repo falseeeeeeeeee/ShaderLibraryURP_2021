@@ -12,6 +12,7 @@ Material:
   m_ValidKeywords:
   - _OUTLINEAUTOSIZE_ON
   - _RAMPSYTLE_INK
+  - _RECEIVESHADOWS_ON
   m_InvalidKeywords:
   - _FOLDOUT_DIFFUSE_ON
   - _FOLDOUT_OTHER_ON
