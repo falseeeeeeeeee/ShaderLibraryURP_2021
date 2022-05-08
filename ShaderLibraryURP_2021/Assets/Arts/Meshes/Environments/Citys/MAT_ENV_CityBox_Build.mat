@@ -23,7 +23,6 @@ Material:
   m_Name: MAT_ENV_CityBox_Build
   m_Shader: {fileID: 4800000, guid: 27af876099dbf294095a90c3856cbb13, type: 3}
   m_ValidKeywords:
-  - _OUTLINEAUTOSIZE_ON
   - _RAMPSYTLE_INK
   - _RECEIVESHADOWS_ON
   m_InvalidKeywords:
@@ -31,6 +30,7 @@ Material:
   - _FOLDOUT_OTHER_ON
   - _FOLDOUT_OUTLINE_ON
   - _FOLDOUT_TOONSHADOW_ON
+  - _OUTLINEAUTOSIZE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

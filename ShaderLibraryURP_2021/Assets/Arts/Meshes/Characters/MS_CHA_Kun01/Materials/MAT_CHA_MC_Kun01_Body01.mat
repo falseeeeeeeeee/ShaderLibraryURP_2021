@@ -23,6 +23,7 @@ Material:
   m_Name: MAT_CHA_MC_Kun01_Body01
   m_Shader: {fileID: 4800000, guid: 27af876099dbf294095a90c3856cbb13, type: 3}
   m_ValidKeywords:
+  - _OUTLINEAUTOSIZE_ON
   - _RAMPSYTLE_INK
   - _RECEIVESHADOWS_ON
   m_InvalidKeywords:
@@ -167,8 +168,8 @@ Material:
     - _GuassianHStep: 0.5
     - _GuassianResolution: 800
     - _GuassianVStep: 0.5
-    - _InlinePower: 2
-    - _InlineThred: 0.95
+    - _InlinePower: 5.77
+    - _InlineThred: 0.014
     - _InteriorNoiseLevel: 1
     - _InvincibleSwitch: 0
     - _LevelStyle: 0
@@ -178,10 +179,10 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineAutoSize: 0
+    - _OutlineAutoSize: 1
     - _OutlineNoiseScale: 0
     - _OutlineNoiseWidth: 2
-    - _OutlineWidth: 1.6
+    - _OutlineWidth: 64
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _RampSytle: 3

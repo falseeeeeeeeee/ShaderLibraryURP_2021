@@ -231,7 +231,7 @@ Shader "URP/Toon/Ink01"
                 half3 color = texGrey.rrr * _BaseColor.rgb * shadowColor * mainlighShadow
 			                + texGrey.rrr * _BaseColor.rgb * Ambient
 			                ;
-			    color = lerp(_OutlineColor.rgb, color, fresnel);
+			    color = lerp(_OutlineColor.rgb, color, lerp(1.0, fresnel, _OutlineColor.a *0));
 			    
                 half alpha = 1;
 
@@ -313,7 +313,7 @@ Shader "URP/Toon/Ink01"
 
             ENDHLSL
         }
-        
+        /*
         Pass
         {
         	Name "Outline"
@@ -388,6 +388,8 @@ Shader "URP/Toon/Ink01"
             }
             ENDHLSL
         }
+    	*/
+    	UsePass "Universal Render Pipeline/Lit/DepthOnly"
 
     }
     CustomEditor "Scarecrow.SimpleShaderGUI"
