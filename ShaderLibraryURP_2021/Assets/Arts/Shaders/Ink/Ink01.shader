@@ -227,7 +227,7 @@ Shader "URP/Toon/Ink01"
 				texGrey = pow(texGrey, 0.4);
 				texGrey *= 1 - cos(texGrey * 3.14);
 
-				// Blend Color
+				// Blend ColorStylizedSkybox02
                 half3 color = texGrey.rrr * _BaseColor.rgb * shadowColor * mainlighShadow
 			                + texGrey.rrr * _BaseColor.rgb * Ambient
 			                ;

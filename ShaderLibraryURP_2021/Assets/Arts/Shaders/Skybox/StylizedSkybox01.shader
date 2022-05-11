@@ -1,4 +1,4 @@
-﻿Shader "URP/Sky/StylizationSkybox01"
+﻿Shader "URP/Sky/StylizedSkybox01"
 {
     Properties 
     {
