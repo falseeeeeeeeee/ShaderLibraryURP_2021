@@ -100,8 +100,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_D9F05973: {r: 0.5338644, g: 0.8773585, b: 0.61360407, a: 0}
-    - Color_DB04B181: {r: 0.19651122, g: 0.6037736, b: 0.30544883, a: 0}
+    - Color_D9F05973: {r: 1, g: 0.32941177, b: 0, a: 0}
+    - Color_DB04B181: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

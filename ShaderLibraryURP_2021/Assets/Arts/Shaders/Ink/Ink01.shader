@@ -5,6 +5,8 @@ Shader "URP/Toon/Ink01"
         [Foldout(1,1,0,1)] _foldout_Diffuse ("基本颜色_Foldout", Float) = 1
         [HideInInspector] _BaseColor ("Base Color", Color) = (1, 1, 1)
         [Tex(_BaseColor)] _BaseMap ("Base Map", 2D) = "white" {}
+    	[Toggle] _UseTextureGray ("Use Texture Gray", Float) = 1
+
 
         [Foldout(1,1,0,1)] _foldout_ToonShadow ("卡通颜色_Foldout", Float) = 1
         [Enum_Switch(Double,CustomNum,RampMap,Ink)] _RampSytle ("Ramp Sytle", Float) = 3
@@ -84,7 +86,8 @@ Shader "URP/Toon/Ink01"
             #pragma prefer_hlslcc gles
             #pragma exclude_renderers d3d11_9x	
             #pragma target 2.0
-
+			
+            #pragma shader_feature _USETEXTUREGRAY_ON
             #pragma shader_feature _RAMPSYTLE_DOUBLE _RAMPSYTLE_CUSTOMNUM _RAMPSYTLE_RAMPMAP _RAMPSYTLE_INK
             #pragma shader_feature _RECEIVESHADOWS_ON
 
@@ -100,6 +103,9 @@ Shader "URP/Toon/Ink01"
             #pragma fragment frag
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            #include "../HLSLInclude/FengHLSL.hlsl"
+
+			float4x4 _WorldToMainLightMatrix;
 			
 			TEXTURE2D(_BaseMap);	        SAMPLER(sampler_BaseMap);
 			TEXTURE2D(_RampMap);	        SAMPLER(sampler_RampMap);
@@ -160,11 +166,19 @@ Shader "URP/Toon/Ink01"
                 //Light
 				float3 Ambient = SampleSH(normalWS);
 
-                float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS.xyz);
+				// Shadows Offset
+				float2 simpleNoiseUV = input.positionWS.xz;
+				float simpleNoise1 = Unity_SimpleNoise_float(simpleNoiseUV, 5.0) * 1.0;
+				float simpleNoise2 = Unity_SimpleNoise_float(simpleNoiseUV, 60.0) * 0.5;
+				float simpleNoiseBlend = (simpleNoise1 + simpleNoise2) * 1;
+				float4 offsetShadow = mul(_WorldToMainLightMatrix, float4(simpleNoiseBlend - 0.2, 0.0, simpleNoiseBlend, 1.0));
+
+                float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS.xyz - offsetShadow.xyz);
                 Light mainLight = GetMainLight(shadowCoord);
                 float3 mainlightDir = normalize(mainLight.direction);
 				#if _RECEIVESHADOWS_ON
 					float mainlighShadow = mainLight.distanceAttenuation * mainLight.shadowAttenuation;
+					mainlighShadow = lerp(1.0, (1-mainlighShadow) * 0.4, step(mainlighShadow, 0.95));
 				#else
 					float mainlighShadow = 1.0;
 				#endif
@@ -223,15 +237,21 @@ Shader "URP/Toon/Ink01"
                 float4 var_BaseMap = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv);
 				
 				// Gray
-				float texGrey = (var_BaseMap.r + var_BaseMap.g + var_BaseMap.b)*0.33;
-				texGrey = pow(texGrey, 0.4);
-				texGrey *= 1 - cos(texGrey * 3.14);
+				#if _USETEXTUREGRAY_ON
+					float texGrey = (var_BaseMap.r + var_BaseMap.g + var_BaseMap.b)*0.33;
+					texGrey = pow(texGrey, 0.4);
+					texGrey *= 1 - cos(texGrey * 3.14);
+					float diffuse = texGrey;
+				#else
+					float3 diffuse = var_BaseMap.rgb;
+				#endif
+				
 
-				// Blend ColorStylizedSkybox02
-                half3 color = texGrey.rrr * _BaseColor.rgb * shadowColor * mainlighShadow
-			                + texGrey.rrr * _BaseColor.rgb * Ambient
+				// Blend Color
+                half3 color = diffuse * _BaseColor.rgb * shadowColor * mainlighShadow
+			                + diffuse * _BaseColor.rgb * Ambient
 			                ;
-			    color = lerp(_OutlineColor.rgb, color, lerp(1.0, fresnel, _OutlineColor.a *0));
+			    color = lerp(_OutlineColor.rgb, color, lerp(1.0, fresnel, _OutlineColor.a * 0));
 			    
                 half alpha = 1;
 

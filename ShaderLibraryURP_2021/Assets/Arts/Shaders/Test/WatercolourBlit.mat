@@ -52,6 +52,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Float: 4
+    - _Float_1: 2
+    - _PowA: 2
+    - _PowB: 5.89
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors: []

@@ -24,6 +24,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 27af876099dbf294095a90c3856cbb13, type: 3}
   m_ValidKeywords:
   - _RAMPSYTLE_INK
+  - _USETEXTUREGRAY_ON
   m_InvalidKeywords:
   - _FOLDOUT_DIFFUSE_ON
   - _FOLDOUT_OTHER_ON
@@ -170,6 +171,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _UVSec: 0
+    - _UseTextureGray: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _foldout_Diffuse: 1

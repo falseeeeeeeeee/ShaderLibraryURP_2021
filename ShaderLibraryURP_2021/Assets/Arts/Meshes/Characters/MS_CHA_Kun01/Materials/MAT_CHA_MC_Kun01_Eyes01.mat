@@ -10,14 +10,15 @@ Material:
   m_Name: MAT_CHA_MC_Kun01_Eyes01
   m_Shader: {fileID: 4800000, guid: 27af876099dbf294095a90c3856cbb13, type: 3}
   m_ValidKeywords:
-  - _OUTLINEAUTOSIZE_ON
   - _RAMPSYTLE_INK
   - _RECEIVESHADOWS_ON
+  - _USETEXTUREGRAY_ON
   m_InvalidKeywords:
   - _FOLDOUT_DIFFUSE_ON
   - _FOLDOUT_OTHER_ON
   - _FOLDOUT_OUTLINE_ON
   - _FOLDOUT_TOONSHADOW_ON
+  - _OUTLINEAUTOSIZE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -142,7 +143,7 @@ Material:
     - _EnvironmentReflections: 1
     - _FresnelHardness: 0
     - _FresnelPower: 6
-    - _GguassianRadius: 32.2
+    - _GguassianRadius: 60
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -176,6 +177,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _UVSec: 0
+    - _UseTextureGray: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _foldout_Diffuse: 1
@@ -183,7 +185,7 @@ Material:
     - _foldout_Outline: 1
     - _foldout_ToonShadow: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.31626025, g: 0.5019554, b: 0.6509434, a: 1}
     - _Color: {r: 0.80392164, g: 0.7843138, b: 0.5882353, a: 1}
     - _EmissionCol: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
