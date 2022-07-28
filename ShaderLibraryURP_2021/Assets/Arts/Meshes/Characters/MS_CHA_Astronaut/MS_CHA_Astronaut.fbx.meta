@@ -3,7 +3,12 @@ guid: bbecab8b7df5a3448ade6773c6e58250
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MAT_CHA_Astronaut_Body
+    second: {fileID: 2100000, guid: 5de1835e5169925479c0ae84da9da0e1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
